@@ -11,8 +11,16 @@ export default class App {
     this.#app = document.getElementById("app");
   }
 
+  #initialize() {
+    const grid = new Grid(ROWS, COLS, CELL_SIZE).getElement();
+    grid.style.setProperty("--cell-size", `${CELL_SIZE}px`);
+    grid.style.setProperty("--cols", `${COLS}`);
+    grid.style.setProperty("--rows", `${ROWS}`);
+    
+    this.#app.appendChild(grid);
+  }
+
   run(){
-    const grid = new Grid(ROWS, COLS, CELL_SIZE);
-    this.#app.appendChild(grid.getElement());
+    this.#initialize();
   }
 }
