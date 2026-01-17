@@ -2,6 +2,7 @@
   position: relative;
   width: calc(var(--cols) * var(--cell-size));
   height: calc(var(--rows) * var(--cell-size));
+  margin-top: 20px;
 }
 
 .cell {

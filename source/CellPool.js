@@ -1,5 +1,5 @@
 import Cell from "./Cell.js";
-import CellTypeEnum from "./enums/CellType.js";
+import CellDataEnum from "./enums/CellDataEnum.js";
 
 export default class CellPool {
   #cellSize;
@@ -16,7 +16,7 @@ export default class CellPool {
 
 
   #getRandomCellType() {
-    const types = Object.values(CellTypeEnum);
+    const types = Object.values(CellDataEnum);
     const randomIndex = Math.floor(Math.random() * types.length);
     return types[randomIndex];
   }
@@ -55,10 +55,10 @@ export default class CellPool {
 
   releaseCell(cell) {
     const currentX = cell.getPosition().x;
-    const randomType = this.#getRandomCellType();
+    const cellType = cell.getType();
 
     cell.getElement().style.display = "none";
-    cell.reset(currentX, -1, randomType, this.#onDestroy);
+    cell.reset(currentX, -1, cellType, this.#onDestroy);
 
     this.#pool.push(cell);
   }

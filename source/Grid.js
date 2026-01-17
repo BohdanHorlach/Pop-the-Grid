@@ -1,6 +1,6 @@
 import CellPool from "./CellPool.js";
 
-export default class Grid {
+export default class Grid extends EventTarget {
   #rows;
   #cols;
   #cellSize;
@@ -9,6 +9,7 @@ export default class Grid {
   #cellPool;
 
   constructor(rows, cols, cellSize) {
+    super();
     this.#rows = rows;
     this.#cols = cols;
     this.#cellSize = cellSize;
@@ -19,7 +20,7 @@ export default class Grid {
     this.#cellPool = new CellPool(
       cellSize,
       this.#onCreateCell.bind(this),
-      this.#removeCell.bind(this),
+      this.#onClickOnCell.bind(this),
     );
 
     this.#fillGrid();
@@ -82,13 +83,46 @@ export default class Grid {
   }
 
 
+  #onClickOnCell(x, y) {
+    this.dispatchEvent(
+      new CustomEvent("cellClick", { detail: { x, y } })
+    );
+  }
+
+
   #removeCell(x, y) {
-    if (!this.#cells[x][y]) return;
+    if (!this.#cells[x][y]) 
+      return false;
 
     this.#cellPool.releaseCell(this.#cells[x][y]);
     this.#cells[x][y] = null;
 
-    this.#collapseColumn(x);
+    return true;
+  }
+
+
+  removeCells(cells) {
+    const columns = new Set();
+
+    for (const cell of cells) {
+      const { x, y } = cell.getPosition();
+
+      if (this.#removeCell(x, y)) {
+        columns.add(x);
+      }
+    }
+
+    for (const x of columns) {
+      this.#collapseColumn(x);
+    }
+  }
+
+
+  getCellAt(x, y) {
+    if( x < 0 || x >= this.#cols || y < 0 || y >= this.#rows)
+      return null;
+
+    return this.#cells[x][y];
   }
 
 

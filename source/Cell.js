@@ -2,31 +2,31 @@ export default class Cell {
   #x;
   #y;
   #size;
-  #iconType;
+  #typeData;
   #iconElement;
   #cell;
   #onClick;
 
   
-  constructor(x, y, size, iconType, onClick = () => {}) {
+  constructor(x, y, size, typeData, onClick = () => {}) {
     this.#x = x;
     this.#y = y;
     this.#size = size;
-    this.#iconType = iconType;
+    this.#typeData = typeData;
     this.#onClick = onClick;
 
-    this.#initializeCell(iconType);
+    this.#initializeCell(typeData);
   }
 
 
-  #createIcon(iconType){
+  #createIcon(typeData){
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("width", "100%");
     svg.setAttribute("height", "100%");
     svg.setAttribute("viewBox", "0 0 800 800");
 
     const icon = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    icon.setAttributeNS("http://www.w3.org/1999/xlink", "href", iconType.source);
+    icon.setAttributeNS("http://www.w3.org/1999/xlink", "href", typeData.source);
 
     this.#iconElement = icon;
     svg.appendChild(icon);
@@ -35,11 +35,11 @@ export default class Cell {
   }
 
 
-  #initializeCell(iconType) {
+  #initializeCell(typeData) {
     this.#cell = document.createElement("div");
     this.#cell.classList.add("cell");
 
-    const icon = this.#createIcon(iconType);
+    const icon = this.#createIcon(typeData);
     this.#cell.appendChild(icon);
 
     this.#cell.addEventListener("click", () => {
@@ -74,10 +74,11 @@ export default class Cell {
   }
 
 
-  reset(x, y, iconType, onClick) {
+  reset(x, y, typeData, onClick) {
     this.#y = y;
     this.#x = x;
-    this.#iconElement.setAttributeNS("http://www.w3.org/1999/xlink", "href", iconType.source);
+    this.#typeData = typeData;
+    this.#iconElement.setAttributeNS("http://www.w3.org/1999/xlink", "href", typeData.source);
     this.#onClick = onClick;
     this.#cell.style.display = "";
     this.moveTo(x, y, true);
@@ -91,6 +92,11 @@ export default class Cell {
 
   getPosition() {
     return { x: this.#x, y: this.#y };
+  }
+
+
+  getType() {
+    return this.#typeData.type;
   }
 
 

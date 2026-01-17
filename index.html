@@ -8,19 +8,38 @@
   <link rel="stylesheet" href="styles/grid.css" />
 </head>
 <body>
-  <h1>Pop the Grid</h1>
-  <svg width="64" height="64" viewBox="0 0 800 800">
-    <use href="/public/icons.svg#apple" />
-  </svg>
-  <svg width="64" height="64" viewBox="0 0 1024 1024">
-    <use href="/public/icons.svg#cherry" />
-  </svg>
-  <svg width="64" height="64" viewBox="0 0 800 800">
-    <use href="/public/icons.svg#grape" />
-  </svg>
-  <svg width="64" height="64" viewBox="0 0 800 800">
-    <use href="/public/icons.svg#strawberry" />
-  </svg>
+  <h1 class="title">Pop the Grid</h1>
+  
+  <div class="score-bar">
+    <div class="score-item" data-type="apple">
+      <svg class="score-icon" viewBox="0 0 800 800">
+        <use href="/public/icons.svg#apple" />
+      </svg>
+      <span id="apple-score" class="score-value">0</span>
+    </div>
+
+    <div class="score-item" data-type="cherry">
+      <svg class="score-icon" viewBox="0 0 800 800">
+        <use href="/public/icons.svg#cherry" />
+      </svg>
+      <span id="cherry-score" class="score-value">0</span>
+    </div>
+
+    <div class="score-item" data-type="grape">
+      <svg class="score-icon" viewBox="0 0 800 800">
+        <use href="/public/icons.svg#grape" />
+      </svg>
+      <span id="grape-score" class="score-value">0</span>
+    </div>
+
+    <div class="score-item" data-type="strawberry">
+      <svg class="score-icon" viewBox="0 0 800 800">
+        <use href="/public/icons.svg#strawberry" />
+      </svg>
+      <span id="strawberry-score" class="score-value">0</span>
+    </div>
+  </div>
+
   <div id="app"></div>
   <script type="module" src="index.js"></script>
 </body>
