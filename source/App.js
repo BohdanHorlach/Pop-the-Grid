@@ -2,7 +2,7 @@ import ClusterRemover from "./ClusterRemover.js";
 import Grid from "./Grid.js";
 import ScoreRegistry from "./ScoreRegistry.js";
 
-const ROWS = 5;
+const ROWS = 8;
 const COLS = 5;
 const CELL_SIZE = 60;
 
