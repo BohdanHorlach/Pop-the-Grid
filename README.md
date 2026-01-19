@@ -34,10 +34,12 @@
    ```bash
    cd Pop-the-Grid
    npx serve .
-
+   ```
+   
    або ж, запустити напряму:
    ```bash
    npx serve Pop-the-Grid
+   ```
 
 3. Перейти за локальним посиланням:
    ```bash
